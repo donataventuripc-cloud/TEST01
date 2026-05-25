@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <title>Impianto AS SALA STAMPI - Indice principale</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div id="header-container"></div>
+
+<div class="layout">
+  <nav id="menu-container"></nav>
+
+  <main>
+    <div class="breadcrumb">
+      <a href="index.html">Home</a> &gt; Indice principale
+    </div>
+
+    <section>
+      <h1>Indice principale</h1>
+      <p>Questa è la pagina iniziale della documentazione.</p>
+
+      <h2>Documenti disponibili</h2>
+      <ul>
+        <li><a href="cnc/tnc640.html">Apri documento figlio: CNC - TNC640</a></li>
+      </ul>
+
+      <div class="note">
+        Header, menu e footer sono caricati con JavaScript usando <code>fetch()</code>.
+      </div>
+    </section>
+
+    <section>
+      <h2>Struttura cartelle</h2>
+      <pre><code>Help/
+├── index.html
+├── css/
+│   └── style.css
+├── js/
+│   ├── components.js
+│   └── script.js
+├── partials/
+│   ├── header.html
+│   ├── menu.html
+│   └── footer.html
+├── cnc/
+│   └── tnc640.html
+├── immagini/
+└── pdf/</code></pre>
+    </section>
+  </main>
+</div>
+
+<div id="footer-container"></div>
+
+<script src="js/components.js"></script>
+<script src="js/script.js"></script>
+
+</body>
+</html>

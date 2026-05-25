@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <title>Stazione C/S</title>
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+<div id="header-container"></div>
+
+<div class="layout">
+  <nav id="menu-container"></nav>
+
+  <main>
+    <div class="breadcrumb">
+      <a href="../index.html">Home</a> &gt; Stazione C/S
+    </div>
+
+    <section>
+      <h1>Stazione C/S</h1>
+     </section>
+
+    <section>
+ <h2>
+    Gestione prelievo/deposito
+ </h2>
+<p>
+    Le movimentazioni in ingresso sono sempre manuali. E' possibile richiamare
+    un pallet in qualsiasi fase/stato da qualsiasi posto. <br/>
+    Le movimentazioni in uscita sono automatiche. Il pallet in scarico viene
+    movimentato in base allo stato, a magazzino o a centro di lavoro o a mac. di
+    misura (<em>se abilitata al deposito in automatico</em>). Se la mac. di
+    misura non è abilitata al deposito automatico, l’operatore può “prenotare”
+    l’invio alla misura, qualsiasi sia lo stato del palle, prima di premere il
+    consenso HW allo scarico.
+</p>
+<p>
+    Se l'impianto è in manuale, l'operatore può inviare il pallet a magazzino o
+    a una macchina di misura.
+</p>
+    </section>
+    <section>
+<h2>tecCellOPE - versione stazione di carico/scarico</h2>
+<h3>
+    Icone
+</h3>
+<ul type="disc">
+    <li>
+        Stato
+    </li>
+    <li>
+        Load/Unload
+    </li>
+    <li>
+        Pallet guasti a magazzino
+    </li>
+    <li>
+        Connessione a Server disabilitata
+    </li>
+</ul>
+<h3>
+    Pulsanti
+</h3>
+<ul type="disc">
+    <li>
+        Scarica: completa l’operazione di scarico pezzi dal      pallet; se il
+        lotto ha completato la produzione e su conferma operatore      viene
+        de-associato. Il pallet viene settato in fase 0/da Caricare
+        (AZZURRO). Se viene de-associato il lotto diventa Vuoto (GRIGIO)
+    </li>
+    <li>
+        Carica: carica un nuovo pezzo sul pallet; il pallet      viene settato
+        in  fase 1/da Misurare      (VERDE OLIVA) o in fase 2/Pronto (ARANCIO o
+        VERDE) in base alle sue      caratteristiche (da misurare/già misurato)
+        e in base alle caratteristiche      del lotto (IN PREPARAZIONE/ATTIVO)
+    </li>
+    <li>
+        Scarica + Carica: esegue le operazioni di scarico      del pezzo a bordo
+        e di caricamento del nuovo pezzo analogamente a Scarica      e Carica.
+    </li>
+    <li>
+        No Op: ritorna allo stato precedente all’arrivo in      baia
+        <em>
+            (viene decrementata la fase solo se fase è uguale a ultima      fase
+        </em>
+        ); il pallet esce dalla baia di carico/scarico senza aver eseguito
+        operazioni
+    </li>
+    <li>
+        dati produzione: da accesso all’editor del pallet e      del lotto a
+        bordo
+    </li>
+    <li>
+        gestione pallet: visualizza i pallet in impianto;      permette l’editor
+        di qualsiasi pallet selezionato; permette la      movimentazione da(per
+        baia di carico/scarico
+    </li>
+    <li>
+        reset allarmi: resetta gli eventuali allarmi      segnalati
+        dall’interfaccia
+    </li>
+    <li>
+        cambia rfid: permette di settare il codice RFID      rilevato dal
+        manipolatore se diverso da quello associato al pallet
+    </li>
+    <li>
+        scambio pallet: permette di scambiare due pallet
+    </li>
+</ul>
+<h3>
+    Avvio
+</h3>
+<pre><code>C:\GALATO\tecne\Exe\tecCellOPE.exe --client-id=CS-01-02
+C:\GALATO\tecne\Exe\tecCellOPE.exe --client-id=CS-03-04
+C:\GALATO\tecne\Exe\tecCellOPE.exe --client-id=CS-05-06
+C:\GALATO\tecne\Exe\tecCellOPE.exe --client-id=CS-07-08
+C:\GALATO\tecne\Exe\tecCellOPE.exe --client-id=CS-09-10
+C:\GALATO\tecne\Exe\tecCellOPE.exe --client-id=Z-02
+C:\GALATO\tecne\Exe\tecCellOPE.exe --client-id=Z-02a
+</code></pre>       
+<h3>
+    Esempio configurazione stazioni
+</h3>
+<pre><code>&lt;add key="Client.CS-01-02.TipoStazione" value="Carico/Scarico"/&gt;
+&lt;add key="Client.CS-01-02.CS1" value="CS01" /&gt;
+&lt;add key="Client.CS-01-02.CS2" value="CS02" /&gt;
+&lt;add key="Client.CS-01-02.plc" value="N01"/&gt;
+&lt;add key="Client.CS-03-04.TipoStazione" value="Carico/Scarico"/&gt;
+
+&lt;add key="Client.CS-03-04.CS1" value="CS03" /&gt;
+&lt;add key="Client.CS-03-04.CS2" value="CS04" /&gt;
+&lt;add key="Client.CS-03-04.plc" value="N01"/&gt;
+
+&lt;add key="Client.CS-05-06.TipoStazione" value="Carico/Scarico"/&gt;
+&lt;add key="Client.CS-05-06.CS1" value="CS05" /&gt;
+&lt;add key="Client.CS-05-06.CS2" value="CS06" /&gt;
+&lt;add key="Client.CS-05-06.plc" value="N01"/&gt;
+
+&lt;add key="Client.CS-07-08.TipoStazione" value="Carico/Scarico"/&gt;
+&lt;add key="Client.CS-07-08.CS1" value="CS07" /&gt;
+&lt;add key="Client.CS-07-08.CS2" value="CS08" /&gt;
+&lt;add key="Client.CS-07-08.plc" value="N01"/&gt;
+
+&lt;add key="Client.CS-09-10.TipoStazione" value="Carico/Scarico"/&gt;
+&lt;add key="Client.CS-09-10.CS1" value="CS09" /&gt;
+&lt;add key="Client.CS-09-10.CS2" value="CS10" /&gt;
+&lt;add key="Client.CS-09-10.plc" value="N02"/&gt;
+</code></pre>       
+    </section>
+    <section>
+       <p><a href="../index.html">← Torna all'indice principale</a></p>
+    </section>
+  </main>
+</div>
+
+<div id="footer-container"></div>
+
+<script src="../js/components.js"></script>
+<script src="../js/script.js"></script>
+
+</body>
+</html>

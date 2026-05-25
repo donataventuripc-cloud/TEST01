@@ -1,0 +1,6 @@
+planid	partnb	id	type	idsymbol	actual	nominal	uppertol	lowertol	deviation	exceed	warningLimitCF	featureid	featuresigma	comment	link	linkmode	mmc	useruppertol	userlowertol	fftphi	fftphiunit	zoneroundnessangle	groupname	groupname2	datumAid	datumBid	datumCid	natuppertolid	natlowertolid	featurePosX	featurePosY	featurePosZ	group1	group2	group3	group4	group5	group6	group7	group8	group9	group10	
+AT24_CENTRATURA_STANDARD	1	Val. X_Simmetria1	Val. X	xValue	0.0327852	0.0000000	0.0500000	-0.0500000	0.0327852		100	Simmetria1						0.0500000	-0.0500000									1	1	0.0327852	0.0980732	-353.2499418
+AT24_CENTRATURA_STANDARD	1	Val. Y_Simmetria1	Val. Y	yValue	0.0980732	0.1000000	0.0500000	-0.0500000	-0.0019268		100	Simmetria1						0.0500000	-0.0500000									1	1	0.0327852	0.0980732	-353.2499418
+AT24_CENTRATURA_STANDARD	1	Val. Z_Piano1	Val. Z	zValue	-347.2524786	-347.3000000	0.2000000	-0.2000000	0.0475214		100	Piano1	0.0008505					0.2000000	-0.2000000									1	1	-0.0137898	-0.6768761	-347.2531818
+AT24_CENTRATURA_STANDARD	1	Angolo di rotazione1	Angolo di rotazione	rotationAngle	0.0025279	0.0000000	0.0000000	0.0000000	0.0025279	0.0025279	100	ROT	0.0000000					0.0000000	0.0000000									1	1	0.0000000	0.0980718	-353.2499415
+END

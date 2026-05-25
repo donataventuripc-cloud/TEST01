@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <title>Mac.Misura - Zeiss</title>
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+<div id="header-container"></div>
+
+<div class="layout">
+  <nav id="menu-container"></nav>
+
+  <main>
+    <div class="breadcrumb">
+      <a href="../index.html">Home</a> &gt; ZEISS
+    </div>
+
+    <section>
+      <h1>Mac.Misura - Zeiss</h1>
+     </section>
+
+    <section>
+      <h2>Lettura misure</h2>      
+<p></p>Utilizzando l'interfaccia di tecCellOPE, su richiesta operatore, viene letto il file delle misure chr.txt in una cartella configurabile.<br>
+In allegato un esempio di file chr.txt e il formato del file, in cui i campi sono separati da ”tab”.
+</p>
+<p><a href="../allegati/chr.pdf" >elenco campi chr.txt</a></p>
+<p><a href="../allegati/chr.txt" >chr.txt</a></p>
+<h2 class="doc-title">Gestione prelievo/deposito</h2>
+<p>Le movimentazioni in ingresso sono sempre manuali. E' possibile richiamare un pallet in qualsiasi fase/stato da qualsiasi posto<br>
+La gestione delle movimentazioni in uscita è diversa in base all'esistenza del consenso HW allo scarico. In entrambi i casi il pallet in scarico può essere movimentato solo verso magazzino e baie di carico/scarico</p>
+<h3>Scarico - consenso HW presente</h3>
+<p>Si comporta come una stazione di carico/scarico.<br>
+Su consenso HW per lo scarico, il pallet in automatico va a magazzino a meno di “prenotare” la movimentazione verso una baia di carico/scarico.<br>
+Se l'impianto è in manuale, l'operatore può scegliere come destinazione il magazzino o una baia di carico/scarico</p>
+<p class="red-text">se il pallet non è misurato???</p>
+<h3>Scarico - consenso HW non presente</h3>
+Prelievo: la macchina di misura è sempre Pronta per lo Scarico, se il portale è fuori ingombro.<br>
+Le movimentazioni da/per la macchina sono manuali. Se il pallet non è stato misurato viene richiesta conferma all'operatore prima della movimentazione.
+</p>
+    </section>
+    <section>
+        <h2>tecCellOPE - versione mac. misura</h2>
+        <h3>Icone</h3>
+<ul>
+  <li>Stato</li>
+  <li>Load/Unload</li>
+<!-- <li>Pallet Guasti a magazzino</li> --> 
+  <li>Connessione a Server disabilitata</li>
+</ul>    
+        <h3>Funzioni</h3>
+<ul>
+  <li>Leggi misure <i>(se file presente)</i></li>
+  <li>No Op <i>(viene decrementata la fase solo se fase è uguale a 2)</i></li>
+  <li>dati produzione</li>
+  <li>gestione pallet</li>
+</ul>    
+        <h3>Avvio</h3>      
+        <pre><code>C:\GALATO\tecne\Exe\tecCellOPE.exe --client-id=Z-01
+C:\GALATO\tecne\Exe\tecCellOPE.exe --client-id=Z-02
+C:\GALATO\tecne\Exe\tecCellOPE.exe --client-id=Z-02a
+</code></pre>
+        <h3>Esempio configurazione stazioni</h3>
+  <pre><code>&lt;add key=&quot;Client.Z-01.TipoStazione&quot; value=&quot;Misura&quot;/&gt;
+&lt;add key=&quot;Client.Z-01.CS1&quot; value=&quot;Z01&quot; /&gt;
+&lt;add key=&quot;Client.Z-01.CS2&quot; value=&quot;&quot; /&gt;
+&lt;add key=&quot;Client.Z-01.plc&quot; value=&quot;N01&quot;/&gt;
+&lt;add key=&quot;Client.Z-01.fineWrkHW_Mis&quot; value=&quot;0&quot;/&gt;
+&lt;add key=&quot;Client.Z-01.PcMisureFilePath&quot; value=&quot;C:\Temp\Misure\chr.txt&quot;/&gt;
+&lt;add key=&quot;Client.Z-01.PcMisureSaveFilePath&quot; value=&quot;C:\Temp\Misure\chr_{0:000}_{1:yyyy_MM_dd_HH_mm_ss}.txt&quot; /&gt;
+
+&lt;add key=&quot;Client.Z-02.TipoStazione&quot; value=&quot;Misura&quot;/&gt;
+&lt;add key=&quot;Client.Z-02.CS1&quot; value=&quot;Z02&quot; /&gt;
+&lt;add key=&quot;Client.Z-02.CS2&quot; value=&quot;&quot; /&gt;
+&lt;add key=&quot;Client.Z-02.plc&quot; value=&quot;N01&quot;/&gt;
+&lt;add key=&quot;Client.Z-02.fineWrkHW_Mis&quot; value=&quot;0&quot;/&gt;
+&lt;add key=&quot;Client.Z-02.PcMisureFilePath&quot; value=&quot;C:\Temp\Misure\chr.txt&quot;/&gt;
+&lt;add key=&quot;Client.Z-02.PcMisureSaveFilePath&quot; value=&quot;C:\Temp\Misure\chr_{0:000}_{1:yyyy_MM_dd_HH_mm_ss}.txt&quot; /&gt;
+
+&lt;add key=&quot;Client.Z-02a.TipoStazione&quot; value=&quot;Misura&quot;/&gt;
+&lt;add key=&quot;Client.Z-02a.CS1&quot; value=&quot;Z02a&quot; /&gt;
+&lt;add key=&quot;Client.Z-02a.CS2&quot; value=&quot;&quot; /&gt;
+&lt;add key=&quot;Client.Z-02a.plc&quot; value=&quot;N02&quot;/&gt;
+&lt;add key=&quot;Client.Z-02a.fineWrkHW_Mis&quot; value=&quot;0&quot;/&gt;
+&lt;add key=&quot;Client.Z-02a.PcMisureFilePath&quot; value=&quot;C:\Temp\Misure\chr.txt&quot;/&gt;
+&lt;add key=&quot;Client.Z-0a.PcMisureSaveFilePath&quot; value=&quot;C:\Temp\Misure\chr_{0:000}_{1:yyyy_MM_dd_HH_mm_ss}.txt&quot; /&gt;</code></pre>
+<p>Il valore del parametro "fineWrkHW_Mis" definisce se il consenso HW è presente (1) o non è presente (0)</p>
+</section>
+    <section>
+       <p><a href="../index.html">← Torna all'indice principale</a></p>
+    </section>
+  </main>
+</div>
+
+<div id="footer-container"></div>
+
+<script src="../js/components.js"></script>
+<script src="../js/script.js"></script>
+
+</body>
+</html>
