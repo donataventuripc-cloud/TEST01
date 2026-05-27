@@ -1,1 +1,218 @@
 
+<!DOCTYPE html>
+<html lang="it">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Mac.Misura - Zeiss</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body>
+
+    <div id="header-container"></div>
+
+    <div class="layout">
+        <nav id="menu-container"></nav>
+
+        <main>
+            <div class="breadcrumb">
+                <a href="../index.html">Home</a> &gt; ZEISS
+            </div>
+
+            <section>
+                <h1>Implementazione accesso concorrenza Pallet e Lotto</h1>
+            </section>
+
+            <section>
+                <!-- <h2>tecCellOPE - versione mac. misura</h2> -->
+                <!-- <h3>Icone</h3> -->
+                <h2>Obiettivo</h2>
+                <p>
+                    È stato introdotto un sistema di gestione della concorrenza per:
+                    <br/> -accesso contemporaneo ai pallet
+                    <br/> - modifica concorrente dei lotti di produzione
+                    <br/> - coordinamento tra interfacce utente e controller automatico
+                    <br/>
+                    <br/> L’obiettivo è evitare:
+                    <br/> 1. modifiche concorrenti incoerenti sui dati pallet/lotto
+                    <br/> 2. movimentazioni automatiche mentre un pallet è in modifica
+                    <br/> 3. blocchi permanenti dovuti a crash delle task
+                </p>
+                <h2>Architettura applicativa</h2>
+                <p>
+                    - 7 interfacce tecCellOPE
+                </p>
+                <p>
+                    - controller tecFmsDRV
+                    <br/> - tecCell (escluso dalla gestione; sempre abilitate modifiche a pallet e lotti)
+                </p>
+                <p>
+                    - database SQL Server
+                </p>
+                <h2>
+    Modello di concorrenza implementato
+</h2>
+                <p>
+                    La soluzione implementata utilizza:
+                    <br/> - lock logico applicativo sui pallet
+                    <br/> - ownership del pallet tramite TaskId
+                    <br/> - heartbeat delle task
+                    <br/> - recovery automatica tramite stored procedure attivate da tecFmsDRV
+                </p>
+                <p>
+                    - controllo concorrenza ottimistica sui lotti tramite rowversion
+                </p>
+                <h2>
+    Stati operativi pallet utilizzati
+</h2>
+                <p>
+                    - Free
+                    <br/> - Editing
+                    <br/> - ReservedByController (scheduler)
+                    <br/> - Moving
+                </p>
+                <h2>
+    Modifiche database
+</h2>
+                <p>
+                    Tabella PALLETS:
+                    <br/> - StatoOperativo varchar(30)
+                    <br/> - OwnerTaskId uniqueidentifier
+                    <br/> - StatoChangedAt datetime2
+                    <br/>
+                    <br/> Tabella Produzione:
+                    <br/> - RowVer rowversion
+                    <br/>
+                    <br/> Nuova tabella TaskHeartbeat:
+                    <br/> - TaskId
+                    <br/> - TaskName
+                    <br/> - HostName
+                    <br/> - ProcessId
+                    <br/> - LastHeartbeat
+                    <br/> - IsEnabled
+                </p>
+                <h2>
+    Stored procedure implementate
+</h2>
+                <p>
+                    Gestione pallet:
+                    <br/> - usp_Pallet_Release
+                    <br/> - usp_Pallet_ReleaseAll
+                    <br/> - usp_Pallet_ReleaseAll_AnyTask
+                    <br/> - usp_Pallet_SetState
+                    <br/> - usp_RecoverDeadTasks
+                    <br/>
+                    <br/> Gestione lotti:
+                    <br/> - usp_Lotto_Save_Atomic
+                </p>
+                <p>
+                    - usp_Lotto_Save_ProduzioneMacchineFile
+                </p>
+                <p>
+                    - usp_Lotto_Save_ProduzioneOnly
+                </p>
+                <p>
+                    Table Type SQL Server
+                </p>
+                <p>
+                    - dbo.TvpMacchineEquivalenti
+                    <br/> - dbo.TvpPartProgramUpdate
+                </p>
+                <h2>
+    Gestione UI
+</h2>
+                <p>
+                    Ingresso editor:
+                    <br/> - chiamata usp_Pallet_SetState con stato = Editing
+                    <br/> - acquisizione lock logico
+                    <br/>
+                    <br/> Save:
+                    <br/> - esecuzione logica legacy
+                    <br/> - <em>controllo RowVersion (per ora non utilizzato</em>)
+                    <br/> - rilascio lock tramite usp_Pallet_Release
+                    <br/>
+                    <br/> Chiusura editor:
+                    <br/> - rilascio automatico del pallet
+                </p>
+                <p>
+                    <strong>
+        <em>Se non è possibile acquisire il lock logico, viene abilitato alla
+        modifica un insieme limitato di caratteristiche del pallet e del lotto</em>
+    </strong>
+                </p>
+                <h2>
+    Gestione controller
+</h2>
+                <p>
+                    Scheduler
+                </p>
+                <p>
+                    - chiamata usp_Pallet_SetState con stato = ReservedByController (se non è possibile acquisire il lock - acquisizione lock logico
+                    <br/> - schedulazione delle movimentazioni
+                </p>
+                <p>
+                    - rilascio lock tramite usp_Pallet_Release per i pallet non movimentati
+                    <br/> - cambio stato ai pallet movimentati settando lo stato Moving con usp_Pallet_SetState
+                </p>
+                <p>
+                    Movimentazioni manuali (da interfaccia)
+                </p>
+                <p>
+                    - acquisizione lock logico con usp_PalletSetState con stato = Moving
+                </p>
+                <p>
+                    Gestione movimentazioni
+                </p>
+                <p>
+                    - rilascio lock tramite usp_Pallet_Release per i pallet dei movimenti completati
+                    <br/> - recovery automatica in caso di errore
+                </p>
+                <p>
+                    Inizializzazione
+                </p>
+                <p>
+                    Alla partenza tutti i pallet vengono dichiarati Free
+                </p>
+                <h2>
+    Heartbeat task
+</h2>
+                <p>
+                    Ogni task:
+                    <br/> - si registra in TaskHeartbeat
+                    <br/> - aggiorna periodicamente LastHeartbeat
+                    <br/> - viene marcata come non attiva in caso di chiusura controllata o timeout
+                </p>
+                <p>
+                    Controller – timer che scatta ogni minuto:
+                    <br/> - rileva task morte
+                    <br/> - libera pallet bloccati
+                </p>
+                <h2>
+    Strategia di migrazione
+</h2>
+                <p>
+                    Per limitare le modifiche al software esistente:
+                    <br/> - non sono state riscritte tutte le query legacy
+                    <br/> - sono stati intercettati:
+                    <br/> - ingresso editor
+                    <br/> - save
+                    <br/> - uscita editor
+                    <br/>
+                    <br/> La logica legacy continua a funzionare all’interno del lock applicativo.
+                </p>
+            </section>
+            <section>
+                <p><a href="../index.html">← Torna all'indice principale</a></p>
+            </section>
+        </main>
+    </div>
+
+    <div id="footer-container"></div>
+
+    <script src="../js/components.js"></script>
+    <script src="../js/script.js"></script>
+
+</body>
+
+</html>
