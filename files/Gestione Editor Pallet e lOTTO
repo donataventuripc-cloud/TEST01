@@ -25,156 +25,153 @@
 
             <section>
                 <h2>Form Dati Produzione</h2>
-				<li>
-					<p>
-						1.        È sempre possibile l’accesso in visualizzazione a tutti i
-						pallet e a tutti i lotti associati
-					</p>
-					<p>
-						2.        Accesso in editor - Parte Pallet
-					</p>
-					<p>
-						È permesso se il pallet:
-					</p>
-					<p>
-						·        non è allocato dal controller per una movimentazione o per
-						schedulare la prossima movimentazione
-					</p>
-					<ul>
-						<li>
-							non è allocato in editor da un’altra interfaccia
-						</li>
-					</ul>
-					<p>
-						I dati sono <strong><em><u>tutti modificabili</u></em></strong>:
-					</p>
-					<p>
-						·        In particolare, le origini acquisite sulla macchina di misura
-						sono solo <u>resettabili</u>. In questo caso il pallet passa da
-						“Misurato” a “Non misurato”.
-					</p>
-					<ul>
-						<li>
-							È responsabilità dell’operatore <u>modificare fase e</u>
-							<u>
-								stato
-							</u>
-							in funzione della posizione del pallet in impianto, dell’eventuale
-							reset delle origini e delle modifiche del lotto associato.
-						</li>
-					</ul>
-					<p>
-						<em>
-							Attenzione: se il pallet si trova su una stazione CS e viene premuto
-							UNLOAD HW mentre è aperto l’editor completo
-							<u>
-								non avviene nessun cambiamento di stato in automatico
-							</u>
-						</em>
-						(viene normalmente settato in fase 1- da misurare)
-						<em>
-							: è cura dell’operatore settare lo stato corretto
-						</em>
-					</p>
-					<p>
-						3.        Accesso in editor – Parte Lotto
-					</p>
-					<p>
-						3.1.   De-Associazione lotto: permessa se pallet è in
-						<strong>
-							<em><u>editor</u></em>
-						</strong>
-					</p>
-					<p>
-						3.2.   Associazione lotto (pallet vuoto): permessa se pallet è in
-						<strong><em><u>editor</u></em></strong>
-					</p>
-					<p>
-						3.3.   Editor del lotto associato al pallet :
-					</p>
-					<p>
-						3.3.1. è sempre permesso (indipendentemente dall’allocazione per editor
-						del pallet):
-					</p>
-					<p>
-						·        modificare lo stato, la priorità, il  n° di pallet da produrre,
-						il n° di pallet entrati e usciti;
-					</p>
-					<p>
-						·        impostare nel routing i centri di lavoro e i file di
-						partprogram <u>non ancora</u> <u>definiti</u>.
-					</p>
-					<p>
-						<strong><em>Attenzione</em></strong> <em></em>
-					</p>
-					<p>
-						<em>1)</em>
-						<em>
-							Al momento del salvataggio verrà verificato che le informazioni non
-							siano state nel frattempo modificate da un’altra interfaccia
-							(controllo di concorrenza ottimistica). Se risultano modifiche
-							apportate da altri al lotto, il salvataggio verrà annullato e la
-							maschera sarà aggiornata con i dati più recenti letti dal database.
-						</em>
-					</p>
-					<p>
-						<em>
-							Questa situazione si può verificare solo se il lotto e/o le
-							informazioni del routing vengono modificate contemporaneamente su un
-							altro pallet associato al lotto o direttamente da sinottico.
-						</em>
-					</p>
-					<p>
-						3.3.2. <strong><em><u>solo</u></em></strong> se il pallet è
+				<p>
+					1.        È sempre possibile l’accesso in visualizzazione a tutti i
+					pallet e a tutti i lotti associati
+				</p>
+				<p>
+					2.        Accesso in editor - Parte Pallet
+				</p>
+				<p>
+					È permesso se il pallet:
+				</p>
+				<p>
+					·        non è allocato dal controller per una movimentazione o per
+					schedulare la prossima movimentazione
+				</p>
+				<ul>
+					<li>
+						non è allocato in editor da un’altra interfaccia
+					</li>
+				</ul>
+				<p>
+					I dati sono <strong><em><u>tutti modificabili</u></em></strong>:
+				</p>
+				<p>
+					·        In particolare, le origini acquisite sulla macchina di misura
+					sono solo <u>resettabili</u>. In questo caso il pallet passa da
+					“Misurato” a “Non misurato”.
+				</p>
+				<ul>
+					<li>
+						È responsabilità dell’operatore <u>modificare fase e</u>
 						<u>
-							effettivamente allocato all’editor
+							stato
 						</u>
-						è permesso:
-					</p>
-					<p>
-						·        modificare il routing, ovvero il n° di lavorazioni e il “lancio
-						origini”  (fase di misura presente o non presente),
-					</p>
-					<p>
-						·        modificare il centro di lavoro e il file partprogram associato
-						alle fasi di lavorazione.
-					</p>
-					<p>
-						<strong><em>Attenzione</em></strong> <em></em>
-					</p>
-					<p>
-						<em>1)</em>
-						<em>
-							Al momento del salvataggio verrà verificato che le informazioni non
-							siano state nel frattempo modificate da un’altra interfaccia
-							(controllo di concorrenza ottimistica). Se risultano modifiche
-							apportate da altri al lotto, il salvataggio verrà annullato e la
-							maschera sarà aggiornata con i dati più recenti letti dal database.
-						</em>
-					</p>
-					<p>
-						<em>
-							Questa situazione si può verificare solo se il lotto e/o le
-							informazioni del routing vengono modificate contemporaneamente su un
-							altro pallet associato al lotto o direttamente da sinottico.
-						</em>
-					</p>
-					<p>
-						<em>2)</em>
-						<em>
-							è cura dell’operatore che la fase/stato del pallet sia coerente con
-							le modifiche apportate
-						</em>
-					</p>
-					<p>
-						Main Window
-					</p>
-					<p>
-						btnCarica, btnScarica, btnFine, btnGuasto: accettati solo se il pallet
-						non è in editor altrove
-					</p>
-					<br/>
-				</li>            
+						in funzione della posizione del pallet in impianto, dell’eventuale
+						reset delle origini e delle modifiche del lotto associato.
+					</li>
+				</ul>
+				<p>
+					<em>
+						Attenzione: se il pallet si trova su una stazione CS e viene premuto
+						UNLOAD HW mentre è aperto l’editor completo
+						<u>
+							non avviene nessun cambiamento di stato in automatico
+						</u>
+					</em>
+					(viene normalmente settato in fase 1- da misurare)
+					<em>
+						: è cura dell’operatore settare lo stato corretto
+					</em>
+				</p>
+				<p>
+					3.        Accesso in editor – Parte Lotto
+				</p>
+				<p>
+					3.1.   De-Associazione lotto: permessa se pallet è in
+					<strong>
+						<em><u>editor</u></em>
+					</strong>
+				</p>
+				<p>
+					3.2.   Associazione lotto (pallet vuoto): permessa se pallet è in
+					<strong><em><u>editor</u></em></strong>
+				</p>
+				<p>
+					3.3.   Editor del lotto associato al pallet :
+				</p>
+				<p>
+					3.3.1. è sempre permesso (indipendentemente dall’allocazione per editor
+					del pallet):
+				</p>
+				<p>
+					·        modificare lo stato, la priorità, il  n° di pallet da produrre,
+					il n° di pallet entrati e usciti;
+				</p>
+				<p>
+					·        impostare nel routing i centri di lavoro e i file di
+					partprogram <u>non ancora</u> <u>definiti</u>.
+				</p>
+				<p>
+					<strong><em>Attenzione</em></strong> <em></em>
+				</p>
+				<p>
+					<em>1)</em>
+					<em>
+						Al momento del salvataggio verrà verificato che le informazioni non
+						siano state nel frattempo modificate da un’altra interfaccia
+						(controllo di concorrenza ottimistica). Se risultano modifiche
+						apportate da altri al lotto, il salvataggio verrà annullato e la
+						maschera sarà aggiornata con i dati più recenti letti dal database.
+					</em>
+				</p>
+				<p>
+					<em>
+						Questa situazione si può verificare solo se il lotto e/o le
+						informazioni del routing vengono modificate contemporaneamente su un
+						altro pallet associato al lotto o direttamente da sinottico.
+					</em>
+				</p>
+				<p>
+					3.3.2. <strong><em><u>solo</u></em></strong> se il pallet è
+					<u>
+						effettivamente allocato all’editor
+					</u>
+					è permesso:
+				</p>
+				<p>
+					·        modificare il routing, ovvero il n° di lavorazioni e il “lancio
+					origini”  (fase di misura presente o non presente),
+				</p>
+				<p>
+					·        modificare il centro di lavoro e il file partprogram associato
+					alle fasi di lavorazione.
+				</p>
+				<p>
+					<strong><em>Attenzione</em></strong> <em></em>
+				</p>
+				<p>
+					<em>1)</em>
+					<em>
+						Al momento del salvataggio verrà verificato che le informazioni non
+						siano state nel frattempo modificate da un’altra interfaccia
+						(controllo di concorrenza ottimistica). Se risultano modifiche
+						apportate da altri al lotto, il salvataggio verrà annullato e la
+						maschera sarà aggiornata con i dati più recenti letti dal database.
+					</em>
+				</p>
+				<p>
+					<em>
+						Questa situazione si può verificare solo se il lotto e/o le
+						informazioni del routing vengono modificate contemporaneamente su un
+						altro pallet associato al lotto o direttamente da sinottico.
+					</em>
+				</p>
+				<p>
+					<em>2)</em>
+					<em>
+						è cura dell’operatore che la fase/stato del pallet sia coerente con
+						le modifiche apportate
+					</em>
+				</p>
+				<p>
+					Main Window
+				</p>
+				<p>
+					btnCarica, btnScarica, btnFine, btnGuasto: accettati solo se il pallet
+					non è in editor altrove
+				</p>
 			</section>
             <section>
                 <p><a href="../index.html">← Torna all'indice principale</a></p>
@@ -190,4 +187,3 @@
 </body>
 
 </html>
-
