@@ -51,11 +51,9 @@
                 <p>
                     <em>
 						Attenzione: se il pallet si trova su una stazione CS e viene premuto
-						UNLOAD HW mentre è aperto l’editor completo
-						<u>
-							l'eventuale cambiamento di stato in automatico viene sovrascritto in fase di salvataggio
-						</u>
-						; è cura dell’operatore settare lo stato corretto
+						UNLOAD HW mentre è aperto l’editor completo 
+						<u>l'eventuale cambiamento di stato in automatico viene sovrascritto in fase di salvataggio</u>
+						 ; è cura dell’operatore settare lo stato corretto
 					</em>
                 </p>
                 <!-- uuuu -->
@@ -64,11 +62,20 @@
                     <li>De-Associazione lotto: permessa se pallet è in editor.</li>
                     <li>Associazione lotto (pallet vuoto): permessa se pallet è in editor.</li>
                     <li>
-                        Editor del lotto associato al pallet: è sempre permesso, indipendentemente dall’allocazione per editor del pallet:
-                        <ul>
-                            <li>modificare lo stato, la priorità, il n° di pallet da produrre, il n° di pallet entrati e usciti;</li>
-                            <li>impostare nel routing i centri di lavoro e i file di partprogram non ancora definiti.</li>
-                        </ul>
+                        Editor del lotto associato al pallet:
+						<ul>
+						<li>indipendentemente dall’allocazione per editor del pallet, è sempre permesso:</li>
+	                        <ul>
+	                            <li>modificare lo stato, la priorità, il n° di pallet da produrre, il n° di pallet entrati e usciti;</li>
+	                            <li>impostare nel routing i centri di lavoro e i file di partprogram non ancora definiti.</li>
+	                        </ul>
+	                    <li>
+	                        Solo se il pallet è effettivamente allocato all’editor è permesso:
+	                        <ul>
+	                            <li>modificare il routing, ovvero il n° di lavorazioni e il “lancio origini” (fase di misura presente o non presente);</li>
+	                            <li>modificare il centro di lavoro e il file partprogram associato alle fasi di lavorazione.</li>
+	                        </ul>
+	                    </li>
                     </li>
                 </ul>
 
@@ -82,13 +89,6 @@
                 </p>
 
                 <ul>
-                    <li>
-                        Solo se il pallet è effettivamente allocato all’editor è permesso:
-                        <ul>
-                            <li>modificare il routing, ovvero il n° di lavorazioni e il “lancio origini” (fase di misura presente o non presente);</li>
-                            <li>modificare il centro di lavoro e il file partprogram associato alle fasi di lavorazione.</li>
-                        </ul>
-                    </li>
                 </ul>
 
                 <p><strong>Attenzione</strong></p>
