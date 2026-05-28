@@ -30,7 +30,7 @@
                 <h2>Obiettivo</h2>
                 <p>
                     È stato introdotto un sistema di gestione della concorrenza per:
-                    <br/> -accesso contemporaneo ai pallet
+                    <br/> - accesso contemporaneo ai pallet
                     <br/> - modifica concorrente dei lotti di produzione
                     <br/> - coordinamento tra interfacce utente e controller automatico
                     <br/>
@@ -42,13 +42,9 @@
                 <h2>Architettura applicativa</h2>
                 <p>
                     - 7 interfacce tecCellOPE
-                </p>
-                <p>
-                    - controller tecFmsDRV
-                    <br/> - tecCell (escluso dalla gestione; sempre abilitate modifiche a pallet e lotti)
-                </p>
-                <p>
-                    - database SQL Server
+                    <br/>- controller tecFmsDRV
+                    <br/>- tecCell (escluso dalla gestione; sempre abilitate modifiche a pallet e lotti)
+                    <br/>- database SQL Server
                 </p>
                 <h2>
     Modello di concorrenza implementato
@@ -59,9 +55,7 @@
                     <br/> - ownership del pallet tramite TaskId
                     <br/> - heartbeat delle task
                     <br/> - recovery automatica tramite stored procedure attivate da tecFmsDRV
-                </p>
-                <p>
-                    - controllo concorrenza ottimistica sui lotti tramite rowversion
+                    <br/> - controllo concorrenza ottimistica sui lotti tramite rowversion
                 </p>
                 <h2>
     Stati operativi pallet utilizzati
