@@ -99,12 +99,8 @@
                     <br/>
                     <br/> Gestione lotti:
                     <br/> - usp_Lotto_Save_Atomic
-                </p>
-                <p>
-                    - usp_Lotto_Save_ProduzioneMacchineFile
-                </p>
-                <p>
-                    - usp_Lotto_Save_ProduzioneOnly
+                    <br/> - usp_Lotto_Save_ProduzioneMacchineFile
+                    <br/> - usp_Lotto_Save_ProduzioneOnly
                 </p>
                 <p>
                     Table Type SQL Server
@@ -130,43 +126,31 @@
                     <br/> - rilascio automatico del pallet
                 </p>
                 <p>
-                    <strong>
         <em>Se non è possibile acquisire il lock logico, viene abilitato alla
         modifica un insieme limitato di caratteristiche del pallet e del lotto</em>
-    </strong>
                 </p>
                 <h2>
     Gestione controller
 </h2>
                 <p>
                     Scheduler
-                </p>
-                <p>
-                    - chiamata usp_Pallet_SetState con stato = ReservedByController (se non è possibile acquisire il lock - acquisizione lock logico
+                    <br/> - chiamata usp_Pallet_SetState con stato = ReservedByController (se non è possibile acquisire il lock - acquisizione lock logico
                     <br/> - schedulazione delle movimentazioni
-                </p>
-                <p>
-                    - rilascio lock tramite usp_Pallet_Release per i pallet non movimentati
+                    <br/> - rilascio lock tramite usp_Pallet_Release per i pallet non movimentati
                     <br/> - cambio stato ai pallet movimentati settando lo stato Moving con usp_Pallet_SetState
                 </p>
                 <p>
                     Movimentazioni manuali (da interfaccia)
-                </p>
-                <p>
-                    - acquisizione lock logico con usp_PalletSetState con stato = Moving
+                    <br/> - acquisizione lock logico con usp_PalletSetState con stato = Moving
                 </p>
                 <p>
                     Gestione movimentazioni
-                </p>
-                <p>
-                    - rilascio lock tramite usp_Pallet_Release per i pallet dei movimenti completati
+                    <br/> - rilascio lock tramite usp_Pallet_Release per i pallet dei movimenti completati
                     <br/> - recovery automatica in caso di errore
                 </p>
                 <p>
                     Inizializzazione
-                </p>
-                <p>
-                    Alla partenza tutti i pallet vengono dichiarati Free
+                <br/> - Alla partenza tutti i pallet vengono dichiarati Free
                 </p>
                 <h2>
     Heartbeat task
